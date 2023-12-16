@@ -7,6 +7,26 @@ struct Mahasiswa {
     prodi: String,
 }
 
+struct Stack<T> {
+    items: Vec<T>,
+}
+
+impl<T> Stack<T> {
+    // create a new empty stack
+    fn new() -> Self {
+        Stack { items: Vec::new() }
+    }
+
+    // push an item onto stack
+    fn push(&mut self, item: T) {
+        self.items.push(item);
+    }
+
+    fn pop(&mut self) -> Option<T> {
+        self.items.pop()
+    }
+}
+
 struct Queue<T> {
     items: Vec<T>,
 }
