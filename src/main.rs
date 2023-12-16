@@ -63,6 +63,34 @@ where
 }
 
 fn main() {
+    
+    //stack
+    let mut stack = Stack::new();
+
+    let mahasiswa_1 = Mahasiswa {
+        nim: String::from("12345"),
+        nama: String::from("Abdul"),
+        prodi: String::from("TI"),
+    };
+
+    let mahasiswa_2 = Mahasiswa {
+        nim: String::from("45678"),
+        nama: String::from("Zaki"),
+        prodi: String::from("MI"),
+    };
+
+    stack.push(mahasiswa_1);
+    stack.push(mahasiswa_2);
+
+    // Display the data in the stack before popping
+    if let Some(top) = stack.pop() {
+        println!("Top of the stack: {:?}", top);
+    }
+
+    while let Some(item) = stack.pop() {
+        println!("Proped from stack: {:?}", item);
+    }
+
     //queue
     let mut queue = Queue::new();
 
@@ -86,5 +114,4 @@ fn main() {
     while let Some(item) = queue.dequeue() {
         println!("Dequeue from queue: {:?}", item);
     }
-    
 }
