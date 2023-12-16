@@ -1,17 +1,23 @@
 use std::fmt::Debug;
 
-#[derive(Debug)]
+use tabled::{Tabled, Table};
+
+#[derive(Debug, Tabled)]
 struct Mahasiswa {
     nim: String,
     nama: String,
     prodi: String,
 }
 
+#[derive(Debug)]
 struct Stack<T> {
     items: Vec<T>,
 }
 
-impl<T> Stack<T> {
+impl<T> Stack<T>
+where
+    T: Debug,
+{
     // create a new empty stack
     fn new() -> Self {
         Stack { items: Vec::new() }
@@ -27,13 +33,14 @@ impl<T> Stack<T> {
     }
 }
 
+#[derive(Debug)]
 struct Queue<T> {
     items: Vec<T>,
 }
 
 impl<T> Queue<T>
 where
-    T: Debug,
+    T: Debug + Tabled,
 {
     fn new() -> Self {
         Queue { items: Vec::new() }
@@ -56,14 +63,18 @@ where
     }
 
     fn print_all(&self) {
-        for item in &self.items {
-            println!("Queue item: {:?}", item);
-        }
+        // for item in &self.items {
+        //     // println!("Queue item: {:?}", item);
+        //     rows.push(item);
+        // }
+
+        let table = Table::new(&self.items);
+        println!("{}", table);
+
     }
 }
 
 fn main() {
-    
     //stack
     let mut stack = Stack::new();
 
@@ -109,6 +120,8 @@ fn main() {
     queue.enqueue(mahasiswa_1);
     queue.enqueue(mahasiswa_2);
 
+    // Print all data in the queue using tabled
+    println!("Queue:");
     queue.print_all();
 
     while let Some(item) = queue.dequeue() {
