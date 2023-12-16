@@ -1,23 +1,10 @@
 use std::fmt::Debug;
 
-struct Stack<T> {
-    items: Vec<T>,
-}
-
-impl<T> Stack<T> {
-    // create a new empty stack
-    fn new() -> Self {
-        Stack { items: Vec::new() }
-    }
-
-    // push an item onto stack
-    fn push(&mut self, item: T) {
-        self.items.push(item);
-    }
-
-    fn pop(&mut self) -> Option<T> {
-        self.items.pop()
-    }
+#[derive(Debug)]
+struct Mahasiswa {
+    nim: String,
+    nama: String,
+    prodi: String,
 }
 
 struct Queue<T> {
@@ -56,32 +43,28 @@ where
 }
 
 fn main() {
-    //stack
-    let mut stack = Stack::new();
-
-    stack.push(3);
-    stack.push(1);
-    stack.push(2);
-
-    // Display the data in the stack before popping
-    if let Some(top) = stack.pop() {
-        println!("Top of the stack: {}", top);
-    }
-
-    while let Some(item) = stack.pop() {
-        println!("Proped from stack: {}", item);
-    }
-
     //queue
     let mut queue = Queue::new();
 
-    queue.enqueue(1);
-    queue.enqueue(2);
-    queue.enqueue(3);
+    let mahasiswa_1 = Mahasiswa {
+        nim: String::from("12345"),
+        nama: String::from("Abdul"),
+        prodi: String::from("TI"),
+    };
+
+    let mahasiswa_2 = Mahasiswa {
+        nim: String::from("45678"),
+        nama: String::from("Zaki"),
+        prodi: String::from("MI"),
+    };
+
+    queue.enqueue(mahasiswa_1);
+    queue.enqueue(mahasiswa_2);
 
     queue.print_all();
-    
+
     while let Some(item) = queue.dequeue() {
-        println!("Dequeue from queue: {}", item);
+        println!("Dequeue from queue: {:?}", item);
     }
+    
 }
